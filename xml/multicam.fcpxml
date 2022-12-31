@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fcpxml>
+<!-- https://developer.apple.com/documentation/professional_video_applications/fcpxml_reference/document_type_definition -->
+<fcpxml version="1.10">
+ <!-- https://developer.apple.com/documentation/professional_video_applications/fcpxml_reference/import-options -->
+ <import-options>
+  <option key="copy assets" value="1"/>
+  <option key="library location" value="/Users/paul/Documents/multicam.fcpbundle"/>
+ </import-options>
+
+ <resources>
+  <media id="r1" name="clip_25">  <!-- wants to be new name for each import -->
+   <!-- https://developer.apple.com/documentation/professional_video_applications/fcpxml_reference/media/multicam_media -->
+   <multicam format="r2">
+    <mc-angle name="Camera1" angleID="a1">
+     <asset-clip name="Camera1" ref="r3" />
+    </mc-angle>
+    <mc-angle name="Camera2" angleID="a2">
+     <asset-clip name="Camera2" ref="r4" />
+    </mc-angle>
+    <mc-angle name="Camera3" angleID="a3">
+     <asset-clip name="Camera3" ref="r5" />
+    </mc-angle>
+    <mc-angle name="Camera4" angleID="a4">
+     <asset-clip name="Camera4" ref="r6" />
+    </mc-angle>
+    <mc-angle name="Desktop" angleID="a5">
+     <asset-clip name="Desktop" ref="r7" />
+    </mc-angle>
+    <mc-angle name="Oscilloscope" angleID="a6">
+     <asset-clip name="Oscilloscope" ref="r8" />
+    </mc-angle>
+    <mc-angle name="Sound" angleID="a7">
+     <asset-clip name="Sound" ref="r9" />
+    </mc-angle>
+   </multicam>
+  </media>
+  <!--<format id="r2" name="FFVideoFormat1080p5994" frameDuration="1001/60000s" width="1920" height="1080" colorSpace="1-1-1 (Rec. 709)"/>-->
+  <format id="r2" name="FFVideoFormat3840x2160p5994" frameDuration="1001/60000s" width="3840" height="2160" />
+  <asset id="r3">
+   <media-rep kind="original-media" src="file:///Users/paul/camera1.cbr.mov" />
+  </asset>
+  <asset id="r4">
+   <media-rep kind="original-media" src="file:///Users/paul/camera2.cbr.mov" />
+  </asset>
+  <asset id="r5">
+   <media-rep kind="original-media" src="file:///Users/paul/camera3.cbr.mov" />
+  </asset>
+  <asset id="r6">
+   <media-rep kind="original-media" src="file:///Users/paul/camera4.cbr.mov" />
+  </asset>
+  <asset id="r7">
+   <media-rep kind="original-media" src="file:///Users/paul/desktop.constqp.mp4" />
+  </asset>
+  <asset id="r8">
+   <media-rep kind="original-media" src="file:///Users/paul/scope.vbr.mp4" />
+  </asset>
+  <asset id="r9">
+   <media-rep kind="original-media" src="file:///Users/paul/sound.mp4" />
+  </asset>
+ </resources>
+
+ <!-- https://developer.apple.com/documentation/professional_video_applications/fcpxml_reference/describing_final_cut_pro_items_in_fcpxml -->
+ <!-- automatic transcoding only seems to happen if new event name and FCP already running  -->
+ <library location="file:///Users/paul/Documents/multicam.fcpbundle/">
+  <event name="My_Event">
+   <mc-clip ref="r1" name="clip_25" duration="5s"> <!-- duration req'd but ignored -->
+     <mc-source angleID="a1" srcEnable="all"/>
+   </mc-clip>
+  </event>
+ </library>
+</fcpxml>
+
+
+
