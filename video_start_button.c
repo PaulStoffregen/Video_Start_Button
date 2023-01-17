@@ -96,6 +96,15 @@ void stop(void)
 	pid4 = 0;
 }
 
+int isrunning(pid_t pid)
+{
+	int status;
+	if (pid <= 0) return 0;
+	pid_t r = waitpid(pid, &status, WNOHANG);
+	if (r == 0) return 1;
+	return 0;
+}
+
 void poll_rawhid(void)
 {
 	char buf[64];
@@ -111,10 +120,10 @@ void poll_rawhid(void)
 		}
 		if (num == 0) {
 			//printf("rawhid read timeout, update LEDs\n");
-			if (pid1 > 0 && kill(pid1, 0) == -1) pid1 = 0;
-			if (pid2 > 0 && kill(pid2, 0) == -1) pid2 = 0;
-			if (pid3 > 0 && kill(pid3, 0) == -1) pid3 = 0;
-			if (pid4 > 0 && kill(pid4, 0) == -1) pid4 = 0;
+			if (pid1 > 0 && !isrunning(pid1)) pid1 = 0;
+			if (pid2 > 0 && !isrunning(pid2)) pid2 = 0;
+			if (pid3 > 0 && !isrunning(pid3)) pid3 = 0;
+			if (pid4 > 0 && !isrunning(pid4)) pid4 = 0;
 			leds_update();
 		}
 		if (num > 0) {
